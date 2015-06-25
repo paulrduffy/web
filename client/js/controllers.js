@@ -19,6 +19,8 @@ todoApp.controller('TodoCtrl', function($rootScope, $scope, todosFactory) {
         $scope.todos.push(data.data);
       });
       $scope.todoInput = '';
+      console.log('Added a To-do ');
+      
     }
   };
 
@@ -32,6 +34,7 @@ todoApp.controller('TodoCtrl', function($rootScope, $scope, todosFactory) {
       todo: _t.todo
     }).then(function(data) {
       if (data.data.updatedExisting) {
+        console.log('Updated a Todo Status ');
         _t.isCompleted = cbk;
       } else {
         alert('Oops something went wrong!');
@@ -52,6 +55,7 @@ todoApp.controller('TodoCtrl', function($rootScope, $scope, todosFactory) {
         if (data.data.updatedExisting) {
           _t.todo = $event.target.value.trim();
           $scope.isEditable[i] = false;
+          console.log('Edited a Todo ');
         } else {
           alert('Oops something went wrong!');
         }
@@ -61,6 +65,7 @@ todoApp.controller('TodoCtrl', function($rootScope, $scope, todosFactory) {
 
   // Delete a Todo
   $scope.delete = function(i) {
+    console.log('Deleted a To-do ');
     todosFactory.deleteTodo($scope.todos[i]._id).then(function(data) {
       if (data.data) {
         $scope.todos.splice(i, 1);
